@@ -4,31 +4,30 @@ import java.net.URI;
 class Handler implements URLHandler {
     // The one bit of state on the server: a number that will be manipulated by
     // various requests.
-    ArrayList<Type> str = new ArrayList<Type>();
+    ArrayList<String> Search = new ArrayList<String>();
+
+    public void append (String search, String next_search){
+        return search + next_search;            
+    }
 
     public String handleRequest(URI url) {
-        if (url.getPath().equals("/")) {
-            return 0;
-        } 
-        
-        else if (url.getpath().contains("/search")){
-        String[] parameters = url.getQuery().split("=")        
-            } 
+        if (url.getPath().equals("/add?s" + extraSearch)) {
+            return String.format(extraSearch);
+        } else if (url.getPath().equals("/search?s")) {
+            return append(extraSearch, extraSearch)
 
-        else {            
+
+        } else {
             System.out.println("Path: " + url.getPath());
-            
-            if (url.getPath().contains("/add")) {                            
-            String[] parameters = url.getQuery().split("=");
-
-                if (parameters [0] = equals("s")){
-                    return ;
+            if (url.getPath().contains("/add")) {
+                String[] parameters = url.getQuery().split("=");
+                if (parameters[0].equals("count")) {
+                    num += Integer.parseInt(parameters[1]);
+                    return String.format("Number increased by %s! It's now %d", parameters[1], num);
                 }
-            }   
-                    
+            }
+            return "404 Not Found!";
         }
-        
-        return "404 Not Found!";
     }
 }
 
